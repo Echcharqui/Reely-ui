@@ -1,0 +1,15 @@
+:host {
+  display: block;
+}
+
+.watchlist-panel {
+  &__title {
+    margin-bottom: 16px;
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}

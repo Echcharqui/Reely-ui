@@ -1,0 +1,22 @@
+:host {
+  display: block;
+}
+
+.movie-row {
+  &__label {
+    margin-bottom: 12px;
+  }
+
+  &__cards {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+  }
+
+  &__placeholder {
+    min-width: 160px;
+    padding: 16px;
+    border: 1px dashed #aaa;
+    border-radius: 8px;
+  }
+}

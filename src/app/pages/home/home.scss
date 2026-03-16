@@ -1,0 +1,15 @@
+:host {
+  display: block;
+}
+
+.home-page {
+  &__section {
+    margin-bottom: 40px;
+  }
+
+  &__row-placeholder {
+    padding: 16px;
+    border: 1px dashed #aaa;
+    border-radius: 8px;
+  }
+}

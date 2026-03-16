@@ -11,6 +11,7 @@
 npm-debug.log
 yarn-error.log
 .claude
+/mock-data
 
 # IDEs and editors
 .idea/
@@ -44,3 +45,4 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+todo.md
