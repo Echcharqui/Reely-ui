@@ -32,6 +32,12 @@ CLAUDE.md
 !.vscode/mcp.json
 .history/*
 
+# Environment — .env contains API keys, never commit it
+.env
+# Generated from .env at build time, never commit these either
+src/environments/environment.ts
+src/environments/environment.prod.ts
+
 # Miscellaneous
 /.angular/cache
 .sass-cache/

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from '../../organisms/header/header';
+import { FooterComponent } from '../../organisms/footer/footer';
 
 /**
  * Atomic Design Level: Template
@@ -14,6 +17,7 @@ import { Component } from '@angular/core';
  */
 @Component({
   selector: 'app-page-layout',
+  imports: [RouterOutlet, HeaderComponent, FooterComponent],
   standalone: true,
   templateUrl: './page-layout.html',
   styleUrl: './page-layout.scss',

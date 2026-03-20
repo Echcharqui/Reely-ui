@@ -1,0 +1,47 @@
+<footer class="app-footer">
+  <div class="app-footer__inner container">
+
+    <!-- Brand -->
+    <div class="app-footer__brand">
+      <a routerLink="/home">
+        <img src="/logo.svg" alt="Reely" class="app-footer__logo" />
+      </a>
+      <p class="app-footer__tagline">Reely helps you discover movies, explore trends, and build your personal watchlist—all in one place.</p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="app-footer__nav">
+      <span class="app-footer__nav-label">Explore</span>
+      <a routerLink="/home">Home</a>
+      <a routerLink="/search">Search</a>
+      <a routerLink="/watchlist">Watchlist</a>
+    </nav>
+
+    <!-- TMDB Attribution -->
+    <div class="app-footer__tmdb">
+      <span class="app-footer__tmdb-label">Powered by</span>
+      <a
+        href="https://www.themoviedb.org"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="app-footer__tmdb-link"
+        aria-label="The Movie Database"
+      >
+        <img
+          src="/tmdb-logo.svg"
+          alt="The Movie Database"
+          class="app-footer__tmdb-logo"
+        />
+      </a>
+      <p class="app-footer__tmdb-notice">
+        This product uses the TMDB API but is not endorsed or certified by TMDB.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="app-footer__bottom">
+    <span>© {{ year }} Reely. All rights reserved.</span>
+  </div>
+</footer>

@@ -1,0 +1,11 @@
+// Abstracts — forward so components can @use 'styles/main' and get everything
+@forward 'abstracts/colors';
+@forward 'abstracts/spacing';
+@forward 'abstracts/typography';
+@forward 'abstracts/variables';
+@forward 'abstracts/mixins';
+
+// Base — rendered once globally
+@use 'base/reset';
+@use 'base/globals';
+@use 'base/helpers';

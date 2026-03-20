@@ -1,29 +1,184 @@
+@use '../../../../../styles/abstracts/colors' as *;
+@use '../../../../../styles/abstracts/typography' as *;
+@use '../../../../../styles/abstracts/variables' as *;
+@use '../../../../../styles/abstracts/spacing' as *;
+@use '../../../../../styles/abstracts/mixins' as *;
+
 :host {
   display: block;
 }
 
 .app-header {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  padding: 12px 24px;
-  border-bottom: 1px solid #ddd;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: $navbar-height;
 
-  &__brand {
-    font-weight: bold;
-    font-size: 1.25rem;
+  // Transparent by default — ::before pseudo handles the top-gradient
+  background-color: transparent;
+  box-shadow: none;
+  transition:
+    background-color 350ms ease,
+    box-shadow 350ms ease;
+
+  // Top-gradient layer: solid at top, fades to transparent at bottom
+  // Sits behind all header content via z-index: -1 within this stacking context
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      to bottom,
+      $color-background 20%,
+      color-alpha($color-background, 0) 100%
+    );
+    opacity: 1;
+    transition: opacity 350ms ease;
+    pointer-events: none;
   }
 
-  &__nav {
-    display: flex;
-    gap: 16px;
+  // Once the user scrolls down: solid background + red glow shadow kick in
+  // and the gradient pseudo fades out so only the solid fill remains
+  &--scrolled {
+    background-color: $color-background;
+    box-shadow:
+      0 1px 12px color-alpha($color-branding, 0.3),
+      0 1px 0 color-alpha($color-branding, 0.06);
 
-    a {
-      text-decoration: none;
+    &::before {
+      opacity: 0;
     }
   }
 
-  &__search {
+  // --- Inner flex row (constrained by .container) ---
+  &__inner {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: $space-5;
+  }
+
+  // --- Brand ---
+  &__brand {
+    flex-shrink: 0;
+
+    a img {
+      display: block;
+      width: 90px;
+    }
+  }
+
+  // --- Desktop nav ---
+  &__nav {
+    display: none;
+    align-items: center;
+    gap: $space-4;
+
+    @include respond-to(md) {
+      display: flex;
+    }
+
+    a {
+      font-family: $font-family-heading;
+      font-size: $font-size-lg;
+      color: $color-text-unfocused;
+      text-decoration: none;
+      transition: color $transition-fast;
+      padding-bottom: 2px;
+
+      &:hover {
+        color: $color-text;
+      }
+
+      &:active {
+        opacity: 0.7;
+      }
+
+      &.active {
+        color: $color-text;
+        border-bottom: 2px solid $color-branding;
+      }
+    }
+  }
+
+  // --- Right-side actions ---
+  &__actions {
+    @include flex-center;
+    gap: $space-2;
     margin-left: auto;
+  }
+
+  // --- Generic icon button ---
+  &__icon-btn {
+    @include flex-center;
+    width: 36px;
+    height: 36px;
+    color: color-alpha($color-text, 0.8);
+    border: none;
+    cursor: pointer;
+    transition-property: color;
+    transition-duration: 300ms;
+    transition-timing-function: ease;
+
+    &:hover {
+      color: $color-text;
+    }
+  }
+
+  // --- Mobile toggle: hidden on desktop ---
+  &__menu-toggle {
+    display: flex;
+
+    @include respond-to(md) {
+      display: none;
+    }
+  }
+}
+
+// --- Mobile nav drawer ---
+.app-header__mobile-nav {
+  position: fixed;
+  top: $navbar-height;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  background-color: $color-background;
+  border-bottom: 1px solid $color-border;
+  padding: $space-4 0;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: $space-1;
+  }
+
+  @include respond-to(md) {
+    display: none;
+  }
+
+  a {
+    font-family: $font-family-heading;
+    font-size: $font-size-xl;
+    color: $color-text-unfocused;
+    text-decoration: none;
+    padding: $space-3 0;
+    border-bottom: 1px solid $color-border;
+    transition: color $transition-fast;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      color: $color-text;
+    }
+
+    &.active {
+      color: $color-text;
+      border-bottom-color: $color-branding;
+    }
   }
 }

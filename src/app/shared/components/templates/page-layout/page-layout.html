@@ -1,14 +1,9 @@
 <div class="page-layout">
-  <header class="page-layout__header">
-    <!-- app-header will be placed here -->
-    <div class="page-layout__header-placeholder">Header</div>
-  </header>
+  <app-header></app-header>
 
   <main class="page-layout__main">
-    <ng-content />
+    <router-outlet></router-outlet>
   </main>
 
-  <footer class="page-layout__footer">
-    <p>Footer</p>
-  </footer>
+  <app-footer></app-footer>
 </div>

@@ -1,0 +1,232 @@
+@use '../../../../../styles/abstracts/colors' as *;
+@use '../../../../../styles/abstracts/typography' as *;
+@use '../../../../../styles/abstracts/variables' as *;
+@use '../../../../../styles/abstracts/spacing' as *;
+@use '../../../../../styles/abstracts/mixins' as *;
+
+:host {
+  display: block;
+}
+
+.app-hero-banner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  // Responsive heights — compact but still cinematic
+  height: 350px;
+
+  @include respond-to(md) {
+    height: 500px;
+  }
+
+  @include respond-to(xl) {
+    height: 720px;
+  }
+
+  // --- Backdrop image ---
+  &__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    // Mobile: center-heavy to keep subject visible in tight crop
+    object-position: 60% center;
+
+    @include respond-to(sm) {
+      object-position: 55% 20%;
+    }
+
+    @include respond-to(md) {
+      object-position: center 18%;
+    }
+
+    @include respond-to(lg) {
+      object-position: center 15%;
+    }
+  }
+
+  // --- Layered gradient overlay ---
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background:
+    // Left content scrim
+      linear-gradient(
+        to right,
+        color-alpha($color-background-page, 0.85) 0%,
+        color-alpha($color-background-page, 0.6) 22%,
+        color-alpha($color-background-page, 0.2) 48%,
+        transparent 78%
+      ),
+      // Top-left light recovery
+      radial-gradient(
+          ellipse at 20% 10%,
+          transparent 0%,
+          transparent 30%,
+          color-alpha($color-background-page, 0.18) 65%,
+          transparent 80%
+        ),
+      // Right edge shading
+      linear-gradient(to left, color-alpha($color-background-page, 0.6) 0%, transparent 38%),
+      // Top bar shading
+      linear-gradient(
+          to bottom,
+          color-alpha($color-background-page, 0.75) 0%,
+          color-alpha($color-background-page, 0.3) 18%,
+          transparent 34%
+        ),
+      // Bottom fade into page background
+      linear-gradient(
+          to top,
+          $color-background-page 0%,
+          $color-background-page 6%,
+          color-alpha($color-background-page, 0.85) 22%,
+          color-alpha($color-background-page, 0.4) 45%,
+          transparent 60%
+        ),
+      // Corner vignettes
+      radial-gradient(
+          ellipse at 0% 0%,
+          color-alpha($color-background-page, 0.8) 0%,
+          transparent 52%
+        ),
+      radial-gradient(
+        ellipse at 100% 0%,
+        color-alpha($color-background-page, 0.75) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse at 0% 100%,
+        color-alpha($color-background-page, 0.7) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse at 100% 100%,
+        color-alpha($color-background-page, 0.7) 0%,
+        transparent 48%
+      );
+  }
+  // --- Content wrapper (sits above overlay) ---
+  &__content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    padding-top: $navbar-height;
+    padding-bottom: $space-6;
+
+    @include respond-to(md) {
+      padding-bottom: $space-7;
+    }
+
+    @include respond-to(lg) {
+      align-items: center;
+      padding-bottom: 0;
+    }
+  }
+
+  // --- Content column ---
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+    max-width: 520px;
+    // Blanket shadow so every text child stays legible over any image
+    text-shadow: 0 1px 10px color-alpha(#000, 0.65);
+
+    @include respond-to(md) {
+      gap: $space-4;
+      max-width: 560px;
+    }
+  }
+
+  // --- Metadata row: genre tags · rating · year ---
+  &__meta-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: $space-2;
+  }
+
+  &__rating {
+    @include flex-center;
+    gap: 4px;
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $color-primary;
+    letter-spacing: 0.02em;
+    padding-left: $space-2;
+    border-left: 1px solid color-alpha($color-text, 0.2);
+
+    lucide-icon {
+      color: $color-primary;
+      flex-shrink: 0;
+    }
+  }
+
+  &__year {
+    font-family: $font-family-base;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    color: $color-text;
+    letter-spacing: 0.04em;
+    padding-left: $space-2;
+    border-left: 1px solid color-alpha($color-text, 0.15);
+  }
+
+  // --- Movie title ---
+  &__title {
+    font-family: $font-family-heading;
+    font-size: clamp(28px, 6vw, 60px);
+    font-weight: $font-weight-regular; // Bebas Neue is inherently bold
+    line-height: $line-height-tight;
+    color: $color-text;
+    text-shadow: 0 2px 16px color-alpha(#000, 0.7);
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+
+  // --- Overview: clamped on mobile, progressively revealed ---
+  &__overview {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-family: $font-family-base;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-regular;
+    line-height: $line-height-base;
+    color: color-alpha($color-text, 0.8);
+    margin: 0;
+    max-width: 420px;
+    text-shadow: 0 1px 6px color-alpha(#000, 0.6);
+
+    @include respond-to(sm) {
+      -webkit-line-clamp: 3;
+    }
+
+    @include respond-to(md) {
+      display: block;
+      overflow: visible;
+      font-size: $font-size-base;
+      max-width: 480px;
+    }
+  }
+
+  // --- Button row ---
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    margin-top: $space-1;
+
+    @include respond-to(md) {
+      gap: $space-3;
+      margin-top: $space-2;
+    }
+  }
+}

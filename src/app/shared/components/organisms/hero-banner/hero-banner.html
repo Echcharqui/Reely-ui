@@ -1,0 +1,50 @@
+@if (movie(); as m) {
+  <section class="app-hero-banner">
+    <!-- Backdrop -->
+    <img
+      class="app-hero-banner__bg"
+      [src]="backdropSrc()"
+      [srcset]="backdropSrcset()"
+      sizes="
+        (max-width: 576px)  100vw,
+        (max-width: 768px)  100vw,
+        (max-width: 1024px) 100vw,
+        100vw
+      "
+      [alt]="m.title"
+      aria-hidden="true"
+      (error)="backdropFailed.set(true)"
+    />
+
+    <!-- Gradient overlay -->
+    <div class="app-hero-banner__overlay"></div>
+
+    <!-- Content -->
+    <div class="app-hero-banner__content container">
+      <div class="app-hero-banner__info">
+        <!-- Metadata: genres · rating · year -->
+        <div class="app-hero-banner__meta-row">
+          @for (genre of m.genres.slice(0, 3); track genre) {
+            <app-ui-tag variant="outline">{{ genre }}</app-ui-tag>
+          }
+          <span class="app-hero-banner__rating">
+            <lucide-icon [img]="icons.Star" [size]="13" aria-hidden="true" />
+            {{ m.rating.toFixed(1) }}
+          </span>
+          @if (releaseYear()) {
+            <span class="app-hero-banner__year">{{ releaseYear() }}</span>
+          }
+        </div>
+
+        <h1 class="app-hero-banner__title">{{ m.title }}</h1>
+
+        <p class="app-hero-banner__overview">{{ m.overview }}</p>
+
+        <div class="app-hero-banner__actions">
+          <app-ui-button variant="primary" [icon]="icons.Play">Play</app-ui-button>
+          <app-ui-button variant="ghost" [icon]="icons.Info">More Info</app-ui-button>
+        </div>
+      </div>
+    </div>
+  </section>
+}

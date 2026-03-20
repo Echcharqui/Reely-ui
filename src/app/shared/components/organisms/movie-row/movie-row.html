@@ -1,9 +1,43 @@
-<div class="movie-row">
-  <h2 class="movie-row__label">Row Label</h2>
-  <div class="movie-row__cards">
-    <!-- app-movie-card items will be rendered here -->
-    <div class="movie-row__placeholder">Movie Card 1</div>
-    <div class="movie-row__placeholder">Movie Card 2</div>
-    <div class="movie-row__placeholder">Movie Card 3</div>
+<section class="movie-row">
+  <!-- Row header -->
+  <div class="movie-row__header">
+    <h2 class="movie-row__label">{{ rowLabel() }}</h2>
   </div>
-</div>
+
+  @if (movies().length > 0) {
+    <!-- Scroll area -->
+    <div class="movie-row__track">
+      <!-- Left arrow -->
+      <button
+        class="movie-row__arrow movie-row__arrow--left"
+        (click)="scrollLeft()"
+        aria-label="Scroll left"
+      >
+        <lucide-icon [img]="icons.ChevronLeft" [size]="20" />
+      </button>
+
+      <!-- Cards -->
+      <div class="movie-row__cards" #scrollContainer>
+        @for (movie of movies(); track movie.id) {
+          <app-movie-card
+            [title]="movie.title"
+            [posterPath]="movie.posterPath"
+            [rating]="movie.rating"
+            [genres]="movie.genres"
+          />
+        }
+      </div>
+
+      <!-- Right arrow -->
+      <button
+        class="movie-row__arrow movie-row__arrow--right"
+        (click)="scrollRight()"
+        aria-label="Scroll right"
+      >
+        <lucide-icon [img]="icons.ChevronRight" [size]="20" />
+      </button>
+    </div>
+  } @else {
+    <app-empty-state />
+  }
+</section>

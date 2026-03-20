@@ -1,14 +1,28 @@
-<div class="movie-card">
+<article class="movie-card">
+  <!-- Poster -->
   <div class="movie-card__poster">
-    <img src="" alt="Movie poster placeholder" />
+    <img
+      [src]="posterFailed() || !posterUrl() ? 'https://placehold.co/342?text=REELY' : posterUrl()"
+      [alt]="title()"
+      class="movie-card__img"
+      loading="lazy"
+      (error)="posterFailed.set(true)"
+    />
+
+    <!-- Rating badge -->
+    <span class="movie-card__rating">★ {{ ratingDisplay() }}</span>
   </div>
-  <div class="movie-card__body">
-    <h2 class="movie-card__title">Movie Title</h2>
-    <div class="movie-card__meta">
-      <span>2024</span>
-      <span>2h 10m</span>
-      <span>Action</span>
-    </div>
-    <button type="button" class="movie-card__action">Add to Watchlist</button>
+
+  <!-- Info -->
+  <div class="movie-card__info">
+    <h3 class="movie-card__title">{{ title() }}</h3>
+
+    @if (genres().length > 0) {
+      <div class="movie-card__genres">
+        @for (genre of genres().slice(0, 2); track genre) {
+          <app-ui-tag variant="fill">{{ genre }}</app-ui-tag>
+        }
+      </div>
+    }
   </div>
-</div>
+</article>

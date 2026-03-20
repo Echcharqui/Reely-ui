@@ -1,5 +1,9 @@
+@use "../../../../../styles/abstracts/colors" as *;
+@use "../../../../../styles/abstracts/variables" as *;
+
 :host {
   display: block;
+  background-color: $color-background-page;
 }
 
 .page-layout {
@@ -7,19 +11,10 @@
   flex-direction: column;
   min-height: 100vh;
 
-  &__header {
-    flex-shrink: 0;
-  }
-
   &__main {
     flex: 1;
-    padding: 24px;
+    padding-top: calc(#{$navbar-height} + 24px);
+    padding-bottom: 24px;
   }
 
-  &__footer {
-    padding: 16px 24px;
-    border-top: 1px solid #ddd;
-    font-size: 0.875rem;
-    text-align: center;
-  }
 }

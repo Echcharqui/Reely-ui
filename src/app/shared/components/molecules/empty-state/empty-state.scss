@@ -1,3 +1,7 @@
+@use '../../../../../styles/abstracts/colors' as *;
+@use '../../../../../styles/abstracts/mixins' as *;
+@use '../../../../../styles/abstracts/variables' as *;
+
 :host {
   display: block;
 }
@@ -6,6 +10,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
   padding: 32px;
+  border-radius: $radius-lg;
+  @include pulse-alert($color-branding);
+
+  & p {
+    margin: 0;
+    color: $color-primary;
+  }
 }

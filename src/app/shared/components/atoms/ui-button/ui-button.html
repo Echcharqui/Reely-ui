@@ -1,0 +1,13 @@
+<button
+  type="button"
+  class="ui-btn"
+  [class.ui-btn--primary]="variant() === 'primary'"
+  [class.ui-btn--ghost]="variant() === 'ghost'"
+>
+  @if (icon()) {
+    <lucide-icon [img]="icon()!" [size]="iconSize()" aria-hidden="true" />
+  }
+  <span class="ui-btn__title">
+    <ng-content />
+  </span>
+</button>

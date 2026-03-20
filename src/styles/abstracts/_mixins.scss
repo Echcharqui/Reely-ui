@@ -1,0 +1,78 @@
+// Color with opacity
+// Usage: color-alpha($color-branding, 0.5)
+@function color-alpha($color, $alpha) {
+  @return rgba($color, $alpha);
+}
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+// Layout
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Responsive — mobile-first
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == sm {
+    @media (min-width: $breakpoint-sm) {
+      @content;
+    }
+  } @else if $breakpoint == md {
+    @media (min-width: $breakpoint-md) {
+      @content;
+    }
+  } @else if $breakpoint == lg {
+    @media (min-width: $breakpoint-lg) {
+      @content;
+    }
+  } @else if $breakpoint == xl {
+    @media (min-width: $breakpoint-xl) {
+      @content;
+    }
+  }
+}
+
+// Animations
+@keyframes alert-pulse {
+  0%, 100% { background-color: var(--pulse-dim); }
+  50%       { background-color: var(--pulse-bright); }
+}
+
+// Usage: @include pulse-alert($color-branding);
+@mixin pulse-alert($color) {
+  --pulse-dim:    #{rgba($color, 0.12)};
+  --pulse-bright: #{rgba($color, 0.42)};
+  animation: alert-pulse 2s ease-in-out infinite;
+}
+
+// Text truncation
+@mixin truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// Visually hidden (accessible)
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

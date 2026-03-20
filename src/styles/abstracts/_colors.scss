@@ -1,0 +1,14 @@
+// Cinema dark theme — core color palette
+
+$color-background: #1f1f1f; // near-black page background
+$color-background-page: #181818;
+$color-branding: #ea0000; // branding color
+$color-surface: #1a1a1f; // cards, panels, modals
+$color-surface-alt: #242429; // elevated surface (hover states, nested cards)
+$color-text: #e8e8ea; // primary readable text
+$color-text-unfocused: rgb(255, 255, 255, 0.6);
+$color-text-muted: #7a7a85; // secondary / caption text
+$color-primary: #e8a020; // amber gold — cinema accent
+$color-primary-dim: #b37a18; // darker amber for hover/active
+$color-border: #2e2e36; // subtle separator lines
+$color-error: #e05252; // destructive actions / alerts

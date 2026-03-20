@@ -1,12 +1,53 @@
-<header class="app-header">
-  <div class="app-header__brand">Reely</div>
-  <nav class="app-header__nav">
-    <a href="#">Home</a>
-    <a href="#">Search</a>
-    <a href="#">Watchlist</a>
-  </nav>
-  <div class="app-header__search">
-    <!-- app-search-bar will go here -->
-    <input type="text" placeholder="Search..." />
+<header class="app-header" [class.app-header--scrolled]="scrolled()">
+  <div class="app-header__inner container">
+    <!-- Brand -->
+    <div class="app-header__brand">
+      <a routerLink="/home" (click)="closeMenu()">
+        <img src="/logo.svg" alt="Reely logo" />
+      </a>
+    </div>
+
+    <!-- Desktop nav -->
+    <nav class="app-header__nav">
+      <a routerLink="/home" routerLinkActive="active">Home</a>
+      <a routerLink="/search" routerLinkActive="active">Search</a>
+      <a routerLink="/watchlist" routerLinkActive="active">Watchlist</a>
+    </nav>
+
+    <!-- Right-side actions -->
+    <div class="app-header__actions">
+      <button class="app-header__icon-btn" aria-label="Search">
+        <lucide-icon [img]="icons.Search" [size]="20"/>
+      </button>
+
+      <button class="app-header__icon-btn" aria-label="Guest profile">
+        <lucide-icon [img]="icons.User" [size]="18"/>
+      </button>
+
+      <!-- Mobile menu toggle -->
+      <button
+        class="app-header__icon-btn app-header__menu-toggle"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="menuOpen()"
+        aria-label="Toggle navigation"
+      >
+        @if (menuOpen()) {
+          <lucide-icon [img]="icons.X" [size]="20" />
+        } @else {
+          <lucide-icon [img]="icons.Menu" [size]="20" />
+        }
+      </button>
+    </div>
   </div>
 </header>
+
+<!-- Mobile nav drawer -->
+@if (menuOpen()) {
+  <nav class="app-header__mobile-nav">
+    <div class="container">
+      <a routerLink="/home" routerLinkActive="active" (click)="closeMenu()">Home</a>
+      <a routerLink="/search" routerLinkActive="active" (click)="closeMenu()">Search</a>
+      <a routerLink="/watchlist" routerLinkActive="active" (click)="closeMenu()">Watchlist</a>
+    </div>
+  </nav>
+}

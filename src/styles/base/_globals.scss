@@ -1,0 +1,66 @@
+@use '../abstracts/colors' as *;
+@use '../abstracts/typography' as *;
+@use '../abstracts/variables' as *;
+
+// Headings
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+  color: $color-text;
+  font-family: $font-family-heading;
+}
+
+h1 {
+  font-size: $font-size-3xl;
+}
+h2 {
+  font-size: $font-size-2xl;
+}
+h3 {
+  font-size: $font-size-xl;
+}
+h4 {
+  font-size: $font-size-lg;
+}
+h5 {
+  font-size: $font-size-md;
+}
+h6 {
+  font-size: $font-size-base;
+}
+
+p {
+  line-height: $line-height-base;
+  font-family: $font-family-base;
+  color: $color-text;
+}
+
+// Scrollbar — keep dark theme consistent
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: $color-background;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $color-border;
+  border-radius: $radius-full;
+
+  &:hover {
+    background: $color-text-muted;
+  }
+}
+
+// Focus ring
+:focus-visible {
+  outline: 2px solid $color-primary;
+  outline-offset: 2px;
+}

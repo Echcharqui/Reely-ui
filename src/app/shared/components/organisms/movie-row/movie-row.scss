@@ -1,22 +1,136 @@
+@use '../../../../../styles/abstracts/colors' as *;
+@use '../../../../../styles/abstracts/typography' as *;
+@use '../../../../../styles/abstracts/variables' as *;
+@use '../../../../../styles/abstracts/spacing' as *;
+@use '../../../../../styles/abstracts/mixins' as *;
+
 :host {
   display: block;
 }
 
 .movie-row {
-  &__label {
-    margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+
+  // --- Label ---
+  &__header {
+    @include flex-between;
   }
 
+  &__label {
+    font-family: $font-family-heading;
+    font-size: $font-size-xl;
+    color: $color-text;
+    margin: 0;
+  }
+
+  // --- Track: positions arrows relative to the scroll area ---
+  &__track {
+    position: relative;
+
+    // Fade edges to hint at overflow
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: $movie-row-fade-width;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    &::before {
+      left: 0;
+      background: linear-gradient(to right, $color-background-page, transparent);
+    }
+
+    &::after {
+      right: 0;
+      background: linear-gradient(to left, $color-background-page, transparent);
+    }
+  }
+
+  // --- Scrollable cards strip ---
   &__cards {
     display: flex;
-    gap: 16px;
+    gap: $movie-row-gap;
     overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-inline: 10px; // matches fade overlay width so first/last cards are fully visible
+    scroll-padding-inline-start: $movie-row-fade-width; // prevents snap from pulling first card back under the fade
+    padding-bottom: $space-4; // room for shadow
+    padding-top: $space-2; // room for shadow
+
+    @include respond-to('sm') {
+      padding-left: 0px !important;
+    }
+
+    @include respond-to('md') {
+      padding-inline: $movie-row-fade-width; // matches fade overlay width so first/last cards are fully visible
+      padding-bottom: $space-4; // room for shadow
+      padding-top: $space-2; // room for shadow
+      padding-left: 24px !important;
+    }
+
+    // Hide scrollbar visually
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    app-movie-card {
+      scroll-snap-align: start;
+    }
   }
 
-  &__placeholder {
-    min-width: 160px;
-    padding: 16px;
-    border: 1px dashed #aaa;
-    border-radius: 8px;
+  // --- Arrow buttons ---
+  &__arrow {
+    @include flex-center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: $movie-row-arrow-size;
+    height: $movie-row-arrow-size;
+    border-radius: $radius-full;
+    border: 1px solid $color-border;
+    background-color: $color-surface;
+    color: $color-text-unfocused;
+    cursor: pointer;
+    transition:
+      background-color $transition-fast,
+      color $transition-fast,
+      border-color $transition-fast,
+      opacity $transition-fast;
+    opacity: 0.85;
+
+    &:hover {
+      background-color: $color-surface-alt;
+      border-color: $color-text-muted;
+      color: $color-text;
+      opacity: 1;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-primary;
+      outline-offset: 2px;
+    }
+
+    &--left {
+      left: $movie-row-arrow-offset;
+    }
+
+    &--right {
+      right: $movie-row-arrow-offset;
+    }
+  }
+
+  // --- Empty state ---
+  &__empty {
+    font-family: $font-family-base;
+    font-size: $font-size-sm;
+    color: $color-text-muted;
   }
 }

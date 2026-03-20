@@ -1,0 +1,140 @@
+@use '../../../../../styles/abstracts/colors' as *;
+@use '../../../../../styles/abstracts/typography' as *;
+@use '../../../../../styles/abstracts/variables' as *;
+@use '../../../../../styles/abstracts/spacing' as *;
+@use '../../../../../styles/abstracts/mixins' as *;
+
+:host {
+  display: block;
+}
+
+.app-footer {
+  background-color: $color-background;
+  box-shadow:
+    0 -1px 12px color-alpha($color-branding, 0.3),
+    0 -1px 0 color-alpha($color-branding, 0.06);
+
+  &__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-6;
+    padding-top: $space-6;
+    padding-bottom: $space-6;
+
+    @include respond-to(md) {
+      grid-template-columns: 1fr 1fr 1fr;
+      padding-top: $space-7;
+      padding-bottom: $space-7;
+    }
+  }
+
+  // --- Brand column ---
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+  }
+
+  &__logo {
+    width: 90px;
+  }
+
+  &__tagline {
+    font-family: $font-family-base;
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    line-height: $line-height-base;
+    max-width: 300px;
+
+    @include respond-to(md) {
+      max-width: 200px;
+    }
+  }
+
+  // --- Nav column ---
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+
+    a {
+      font-family: $font-family-heading;
+      font-size: $font-size-lg;
+      color: $color-text-unfocused;
+      text-decoration: none;
+      transition: color $transition-fast;
+      width: fit-content;
+
+      &:hover {
+        color: $color-text;
+      }
+    }
+  }
+
+  &__nav-label {
+    font-family: $font-family-base;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: $space-1;
+  }
+
+  // --- TMDB column ---
+  &__tmdb {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+    align-items: flex-start;
+  }
+
+  &__tmdb-label {
+    font-family: $font-family-base;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  &__tmdb-link {
+    display: inline-block;
+    opacity: 0.85;
+    transition: opacity $transition-fast;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &__tmdb-logo {
+    height: 60px;
+    width: auto;
+  }
+
+  &__tmdb-notice {
+    font-family: $font-family-base;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    line-height: $line-height-base;
+    max-width: 300px;
+
+    @include respond-to(md) {
+      max-width: 220px;
+    }
+  }
+
+  // --- Bottom bar ---
+  &__bottom {
+    @include flex-center;
+    border-top: 1px solid $color-border;
+    padding: $space-4 $space-5;
+
+    span {
+      font-family: $font-family-base;
+      font-size: $font-size-xs;
+      color: $color-text-muted;
+    }
+  }
+}

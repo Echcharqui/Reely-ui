@@ -1,0 +1,42 @@
+@use '../../../../../styles/abstracts/colors' as *;
+@use '../../../../../styles/abstracts/typography' as *;
+@use '../../../../../styles/abstracts/variables' as *;
+@use '../../../../../styles/abstracts/spacing' as *;
+@use '../../../../../styles/abstracts/mixins' as *;
+
+:host {
+  display: inline-block;
+}
+
+.ui-tag {
+  display: inline-block;
+  font-family: $font-family-base;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-tight;
+  padding: $space-2;
+  border-radius: $radius-sm;
+  white-space: nowrap;
+
+  // --- Outline: hero banner context ---
+  // Frosted glass pill, crisp border, uppercase label
+  &--outline {
+    color: $color-text;
+    background-color: color-alpha($color-branding, 0.2);
+    backdrop-filter: blur(6px);
+    border: 1px solid $color-text;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  // --- Fill: card context ---
+  // Solid surface background, muted label, no border — compact size for card rows
+  &--fill {
+    color: $color-text-muted;
+    background-color: $color-surface-alt;
+    border: none;
+    letter-spacing: 0;
+    text-transform: none;
+    padding: 3px 6px;
+  }
+}

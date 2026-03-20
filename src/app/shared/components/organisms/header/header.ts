@@ -1,19 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, signal } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { LucideAngularModule, Search, User, Menu, X } from 'lucide-angular';
 
-/**
- * Atomic Design Level: Organism
- *
- * This component is expected to compose the following atoms and molecules later:
- *   - AppTitleComponent (app-title): the application logo or brand name
- *   - AppSearchBarComponent (app-search-bar): inline search input in the header
- *   - AppButtonComponent (app-button): navigation actions (e.g. watchlist shortcut)
- *
- * It is intentionally kept isolated for now. No child components are imported.
- */
 @Component({
   selector: 'app-header',
   standalone: true,
+  imports: [RouterLink, RouterLinkActive, LucideAngularModule],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
-export class HeaderComponent {}
+
+export class HeaderComponent {
+  readonly icons = { Search, User, Menu, X };
+  readonly menuOpen = signal(false);
+  readonly scrolled = signal(false);
+
+  @HostListener('window:scroll')
+  onScroll(): void {
+    this.scrolled.set(window.scrollY > 10);
+  }
+
+  toggleMenu(): void {
+    this.menuOpen.update((v) => !v);
+  }
+
+  closeMenu(): void {
+    this.menuOpen.set(false);
+  }
+}

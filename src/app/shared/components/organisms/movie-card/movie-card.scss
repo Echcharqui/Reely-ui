@@ -1,34 +1,113 @@
+@use '../../../../../styles/abstracts/colors' as *;
+@use '../../../../../styles/abstracts/typography' as *;
+@use '../../../../../styles/abstracts/variables' as *;
+@use '../../../../../styles/abstracts/spacing' as *;
+
 :host {
   display: block;
+  flex-shrink: 0;
+  width: $movie-card-width;
 }
 
 .movie-card {
   display: flex;
   flex-direction: column;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  width: 100%;
+  border-radius: $movie-card-radius;
   overflow: hidden;
+  background-color: $color-surface;
+  box-shadow: $movie-card-shadow;
+  cursor: pointer;
+  transition: transform $transition-base, box-shadow $transition-base;
 
-  &__poster img {
-    display: block;
-    width: 100%;
+  &:hover {
+    box-shadow: $shadow-lg;
   }
 
-  &__body {
-    padding: 12px;
+  // --- Poster ---
+  &__poster {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    background-color: $color-surface-alt;
+    overflow: hidden;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform $transition-slow;
+
+    .movie-card:hover & {
+      transform: scale(1.04);
+    }
+  }
+
+  &__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-text-muted;
+    font-family: $font-family-base;
+    font-size: $font-size-xs;
+  }
+
+  // --- Rating badge ---
+  &__rating {
+    position: absolute;
+    top: $space-2;
+    left: $space-2;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: $color-primary;
+    font-family: $font-family-base;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    padding: 2px $space-2;
+    border-radius: $radius-sm;
+    backdrop-filter: blur(4px);
+    line-height: $line-height-tight;
+  }
+
+  // --- Info block ---
+  &__info {
+    padding: $space-3;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: $space-2;
+    // Fixed height keeps all cards uniform regardless of title length or genre count
+    height: 84px;
+    overflow: hidden;
   }
 
   &__title {
+    font-family: $font-family-base;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text;
+    line-height: $line-height-tight;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    // Reserve exactly 2 lines so the genres row always sits at the same vertical position
+    height: calc(2 * #{$font-size-sm} * #{$line-height-tight});
+    flex-shrink: 0;
     margin: 0;
-    font-size: 1rem;
   }
 
-  &__meta {
+  // --- Genres ---
+  &__genres {
     display: flex;
-    gap: 8px;
-    font-size: 0.75rem;
+    flex-wrap: nowrap;
+    gap: $space-1;
+    overflow-x: auto;
+    scrollbar-width: none; // Firefox
+    &::-webkit-scrollbar {
+      display: none; // Chrome / Safari
+    }
   }
 }

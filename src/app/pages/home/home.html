@@ -1,15 +1,17 @@
 <div class="home-page">
-  <h1>Home</h1>
-  <p>Featured and trending movies will appear here.</p>
+  <app-hero-banner [movie]="heroBannerMovie" />
 
-  <section class="home-page__section">
-    <h2>Trending Now</h2>
-    <!-- app-movie-row will go here -->
-    <div class="home-page__row-placeholder">Movie row placeholder</div>
-  </section>
+  <section class="home-page__content container">
+    <!-- trending movies -->
+    <app-movie-row [rowLabel]="TrendingLabel" [movies]="trendingMovies" />
+    <!--  -->
 
-  <section class="home-page__section">
-    <h2>Popular This Week</h2>
-    <div class="home-page__row-placeholder">Movie row placeholder</div>
+    <!-- popular movies -->
+    <app-movie-row [rowLabel]="PopularLabel" [movies]="PopularMovies" />
+    <!--  -->
+
+    <!-- popular movies -->
+    <app-movie-row [rowLabel]="TopRatedLabel" [movies]="TopRatedMovies" />
+    <!--  -->
   </section>
 </div>

@@ -1,0 +1,50 @@
+@use '../abstracts/colors' as *;
+@use '../abstracts/spacing' as *;
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// Container
+.container {
+  width: 100%;
+  max-width: $max-width-content;
+  margin: 0 auto;
+  padding: 0 $space-5;
+
+  @include respond-to(md) {
+    padding: 0 $space-6;
+  }
+}
+
+// Display
+.d-flex        { display: flex; }
+.d-grid        { display: grid; }
+.d-block       { display: block; }
+.d-none        { display: none; }
+
+// Alignment
+.flex-center   { @include flex-center; }
+.flex-between  { @include flex-between; }
+
+// Text
+.text-muted    { color: $color-text-muted; }
+.text-primary  { color: $color-primary; }
+.text-center   { text-align: center; }
+.truncate      { @include truncate; }
+
+// Spacing utilities (margin/padding)
+.mt-1 { margin-top: $space-1; }
+.mt-2 { margin-top: $space-2; }
+.mt-4 { margin-top: $space-4; }
+.mt-5 { margin-top: $space-5; }
+
+.mb-1 { margin-bottom: $space-1; }
+.mb-2 { margin-bottom: $space-2; }
+.mb-4 { margin-bottom: $space-4; }
+.mb-5 { margin-bottom: $space-5; }
+
+.gap-2 { gap: $space-2; }
+.gap-4 { gap: $space-4; }
+.gap-5 { gap: $space-5; }
+
+// Visibility
+.visually-hidden { @include visually-hidden; }
