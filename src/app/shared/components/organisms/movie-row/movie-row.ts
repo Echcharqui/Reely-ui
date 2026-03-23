@@ -1,8 +1,8 @@
-import { Component, ElementRef, input, viewChild } from '@angular/core';
-import { LucideAngularModule, ChevronLeft, ChevronRight } from 'lucide-angular';
+import { Component, ElementRef, input, output, viewChild } from '@angular/core';
+import { LucideAngularModule, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-angular';
 import { MovieCardComponent } from '../movie-card/movie-card';
 import { EmptyStateComponent } from '../../molecules/empty-state/empty-state';
-import { Movie } from '../../../types/movie.types';
+import { type Movie } from '../../../types/interfaces/movie.types';
 
 const SCROLL_AMOUNT = 480;
 
@@ -14,10 +14,10 @@ const SCROLL_AMOUNT = 480;
   styleUrl: './movie-row.scss',
 })
 export class MovieRowComponent {
-  readonly rowLabel = input<string>('');
-  readonly movies = input<Movie[]>([]);
+  rowLabel = input<string>('');
+  movies = input<Movie[]>([]);
 
-  readonly icons = { ChevronLeft, ChevronRight };
+  readonly icons = { ChevronLeft, ChevronRight, ArrowRight };
 
   private readonly scrollRef = viewChild<ElementRef<HTMLDivElement>>('scrollContainer');
 
@@ -27,5 +27,9 @@ export class MovieRowComponent {
 
   scrollRight(): void {
     this.scrollRef()?.nativeElement.scrollBy({ left: SCROLL_AMOUNT, behavior: 'smooth' });
+  }
+
+  seeMore(): void {
+    console.log('===> action : show all is clicked !');
   }
 }

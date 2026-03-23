@@ -1,17 +1,21 @@
 <div class="home-page">
-  <app-hero-banner [movie]="heroBannerMovie" />
+  <app-hero-banner [movie]="heroBannerMovie()" />
 
   <section class="home-page__content container">
     <!-- trending movies -->
-    <app-movie-row [rowLabel]="TrendingLabel" [movies]="trendingMovies" />
+    <app-movie-row [rowLabel]="TrendingLabel" [movies]="trendingMovies()" />
+    <!--  -->
+
+    <!-- movies now playing on cinema -->
+    <app-movie-row [rowLabel]="NowPlaying" [movies]="NowplayingMovies()" />
     <!--  -->
 
     <!-- popular movies -->
-    <app-movie-row [rowLabel]="PopularLabel" [movies]="PopularMovies" />
+    <app-movie-row [rowLabel]="PopularLabel" [movies]="PopularMovies()" />
     <!--  -->
 
     <!-- popular movies -->
-    <app-movie-row [rowLabel]="TopRatedLabel" [movies]="TopRatedMovies" />
+    <app-movie-row [rowLabel]="TopRatedLabel" [movies]="TopRatedMovies()" />
     <!--  -->
   </section>
 </div>

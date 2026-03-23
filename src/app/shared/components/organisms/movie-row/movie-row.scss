@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: column;
   gap: $space-3;
+  margin-bottom: $space-6;
 
   // --- Label ---
   &__header {
@@ -23,6 +24,50 @@
     font-size: $font-size-xl;
     color: $color-text;
     margin: 0;
+  }
+
+  // --- See more button ---
+  &__see-more {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-1;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: $font-family-base;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-branding;
+    padding: 0;
+    transition:
+      color opacity $transition-fast,
+      gap $transition-fast;
+      transition-duration: 300ms;
+
+    &:hover {
+      color: color-mix(in srgb, $color-branding 70%, white);
+      gap: $space-2;
+    }
+
+    &:active {
+      opacity: 0.8;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-branding;
+      outline-offset: 4px;
+      border-radius: $radius-sm;
+    }
+  }
+
+  &__see-more-icon {
+    transition: transform $transition-fast;
+
+    .movie-row__see-more:hover & {
+      transform: translateX(3px);
+    }
   }
 
   // --- Track: positions arrows relative to the scroll area ---

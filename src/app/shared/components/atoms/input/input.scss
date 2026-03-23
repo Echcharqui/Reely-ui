@@ -1,8 +1,45 @@
+@use '../../../../../styles/abstracts/colors' as *;
+@use '../../../../../styles/abstracts/typography' as *;
+@use '../../../../../styles/abstracts/variables' as *;
+@use '../../../../../styles/abstracts/spacing' as *;
+@use '../../../../../styles/abstracts/mixins' as *;
+
 :host {
-  display: inline-block;
+  display: block;
 }
 
 .app-input {
   box-sizing: border-box;
   width: 100%;
+  height: 48px;
+  padding: 0 $space-4;
+  background: $color-surface-alt;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  color: $color-text;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  transition:
+    border-color $transition-fast,
+    box-shadow $transition-fast,
+    background-color $transition-fast;
+
+  &::placeholder {
+    color: $color-text-muted;
+    opacity: 0.6;
+  }
+
+  &:hover {
+    border-color: color-alpha($color-text, 0.25);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: color-alpha($color-branding, 0.55);
+    box-shadow: 0 0 0 3px color-alpha($color-text, 0.08);
+  }
+
+  &--with-trailing {
+    padding-right: 48px;
+  }
 }

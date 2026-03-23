@@ -1,6 +1,6 @@
-import { Movie } from '../types/movie.types';
-import { TmdbMovie } from '../types/tmdb.types';
-import { TMDB_GENRE_MAP } from '../types/tmdb-genres';
+import { Movie } from '../types/interfaces/movie.types';
+import { TmdbMovie } from '../types/interfaces/tmdb.types';
+import { TMDB_GENRE_MAP } from '../types/interfaces/tmdb-genres';
 
 /**
  * Maps a raw TMDB API movie object to the app-level `Movie` model.

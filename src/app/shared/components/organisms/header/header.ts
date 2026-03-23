@@ -1,4 +1,4 @@
-import { Component, HostListener, signal } from '@angular/core';
+import { Component, HostListener, signal, output } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LucideAngularModule, Search, User, Menu, X } from 'lucide-angular';
 
@@ -9,11 +9,11 @@ import { LucideAngularModule, Search, User, Menu, X } from 'lucide-angular';
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
-
 export class HeaderComponent {
   readonly icons = { Search, User, Menu, X };
   readonly menuOpen = signal(false);
   readonly scrolled = signal(false);
+  profileClicked = output<void>();
 
   @HostListener('window:scroll')
   onScroll(): void {
@@ -26,5 +26,9 @@ export class HeaderComponent {
 
   closeMenu(): void {
     this.menuOpen.set(false);
+  }
+
+  onGuestProfileClicked(): void {
+    this.profileClicked.emit();
   }
 }

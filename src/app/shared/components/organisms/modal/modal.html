@@ -1,0 +1,14 @@
+@if (isOpen()) {
+  <div class="modal" role="dialog" aria-modal="true">
+    <!-- Backdrop -->
+    <div class="modal__backdrop" (click)="close()"></div>
+
+    <!-- Panel -->
+    <div class="modal__panel modal__panel--{{ size() }}">
+      <!-- Projected content -->
+      <div class="modal__body">
+        <ng-content />
+      </div>
+    </div>
+  </div>
+}

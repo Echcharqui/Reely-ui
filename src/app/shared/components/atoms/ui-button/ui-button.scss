@@ -56,12 +56,32 @@
     }
   }
 
+  // --- branding: solid red brand, dark label ---
+  &--branding {
+    background-color: color-alpha($color-branding,0.8);
+    color: $color-text;
+    box-shadow: $shadow-md;
+
+    lucide-icon {
+      flex-shrink: 0;
+    }
+
+    &:hover {
+      background-color: color-alpha($color-branding, 0.88);
+      box-shadow: $shadow-lg;
+    }
+  }
+
   // --- Ghost: frosted glass, light label ---
   &--ghost {
     background-color: color-alpha(#fff, 0.12);
     color: $color-text;
     backdrop-filter: blur(8px);
     border: 1px solid color-alpha(#fff, 0.14);
+
+    lucide-icon {
+      flex-shrink: 0;
+    }
 
     &:hover {
       background-color: color-alpha(#fff, 0.2);

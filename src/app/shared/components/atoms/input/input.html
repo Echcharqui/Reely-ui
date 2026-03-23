@@ -1,1 +1,8 @@
-<input class="app-input" type="text" placeholder="Enter text..." />
+<input
+  class="app-input"
+  [class.app-input--with-trailing]="withTrailing()"
+  [type]="type()"
+  [placeholder]="placeholder()"
+  [id]="inputId()"
+  [attr.autocomplete]="autocomplete()"
+/>

@@ -3,7 +3,7 @@ import { LucideAngularModule, Play, Star, Info } from 'lucide-angular';
 
 import { UiButtonComponent } from '../../atoms/ui-button/ui-button';
 import { UiTagComponent } from '../../atoms/ui-tag/ui-tag';
-import { Movie } from '../../../types/movie.types';
+import { Movie } from '../../../types/interfaces/movie.types';
 import { getBackdropUrl, getTmdbImageUrl } from '../../../utils/image.utils';
 
 @Component({

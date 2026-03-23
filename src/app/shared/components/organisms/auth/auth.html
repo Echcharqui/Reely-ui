@@ -1,0 +1,177 @@
+<div class="auth">
+  <!-- auth header  -->
+  <div class="auth__header">
+    <h2 class="auth__title">{{ mode() }}</h2>
+
+    <button class="auth__close" (click)="closeTheDialog()" aria-label="Close dialog">
+      <lucide-icon [img]="icons.X" [size]="20" />
+    </button>
+  </div>
+
+  @if (mode() === 'sign-in') {
+    <form class="auth__form" (submit)="$event.preventDefault()">
+      <!-- Email -->
+      <div class="auth__field">
+        <label class="auth__label" for="auth-email">Email address</label>
+        <app-input
+          inputId="auth-email"
+          type="email"
+          placeholder="joi@example.com"
+          autocomplete="email"
+        />
+      </div>
+
+      <!-- Password -->
+      <div class="auth__field">
+        <div class="auth__label-row">
+          <label class="auth__label" for="auth-password">Password</label>
+          <button class="auth__forgot" type="button" (click)="switchToForgetPasswordMode()">Forgot password?</button>
+        </div>
+
+        <div class="auth__input-wrapper">
+          <app-input
+            inputId="auth-password"
+            [type]="showPassword() ? 'text' : 'password'"
+            placeholder="••••••••"
+            autocomplete="current-password"
+            [withTrailing]="true"
+          />
+          <button
+            class="auth__password-toggle"
+            type="button"
+            (click)="togglePassword()"
+            [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'"
+          >
+            @if (showPassword()) {
+              <lucide-icon [img]="icons.EyeOff" [size]="20" />
+            } @else {
+              <lucide-icon [img]="icons.Eye" [size]="20" />
+            }
+          </button>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <app-ui-button [btnType]="buttonType" [variant]="buttonVariant" class="auth__submit-btn"
+        >Sign In</app-ui-button
+      >
+    </form>
+
+    <!-- Footer -->
+    <p class="auth__signup-prompt">
+      Don't have an account?&nbsp;<button
+        class="auth__signup-link"
+        type="button"
+        (click)="switchToSignUpMode()"
+      >
+        Sign up
+      </button>
+    </p>
+  } @else if (mode() === 'sign-up') {
+    <form class="auth__form" (submit)="$event.preventDefault()">
+      <!-- Email -->
+      <div class="auth__field">
+        <label class="auth__label" for="auth-email">Email address</label>
+        <app-input
+          inputId="auth-email"
+          type="email"
+          placeholder="joi@example.com"
+          autocomplete="email"
+        />
+      </div>
+
+      <!-- Password -->
+      <div class="auth__field">
+        <div class="auth__label-row">
+          <label class="auth__label" for="auth-password">Password</label>
+        </div>
+
+        <div class="auth__input-wrapper">
+          <app-input
+            inputId="auth-password"
+            [type]="showPassword() ? 'text' : 'password'"
+            placeholder="••••••••"
+            autocomplete="current-password"
+            [withTrailing]="true"
+          />
+          <button
+            class="auth__password-toggle"
+            type="button"
+            (click)="togglePassword()"
+            [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'"
+          >
+            @if (showPassword()) {
+              <lucide-icon [img]="icons.EyeOff" [size]="20" />
+            } @else {
+              <lucide-icon [img]="icons.Eye" [size]="20" />
+            }
+          </button>
+        </div>
+      </div>
+
+      <!-- Password confirmation -->
+      <div class="auth__field">
+        <div class="auth__label-row">
+          <label class="auth__label" for="auth-password-confirmation">Password Confirmation</label>
+        </div>
+
+        <div class="auth__input-wrapper">
+          <app-input
+            inputId="auth-password-confirmation"
+            [type]="showPassword2() ? 'text' : 'password'"
+            placeholder="••••••••"
+            autocomplete="current-password"
+            [withTrailing]="true"
+          />
+          <button
+            class="auth__password-toggle"
+            type="button"
+            (click)="togglePassword2()"
+            [attr.aria-label]="showPassword2() ? 'Hide password' : 'Show password'"
+          >
+            @if (showPassword2()) {
+              <lucide-icon [img]="icons.EyeOff" [size]="20" />
+            } @else {
+              <lucide-icon [img]="icons.Eye" [size]="20" />
+            }
+          </button>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <app-ui-button [btnType]="buttonType" [variant]="buttonVariant" class="auth__submit-btn"
+        >Sign Up</app-ui-button
+      >
+    </form>
+
+    <!-- Footer -->
+    <p class="auth__signup-prompt">
+      You already have an account?&nbsp;<button class="auth__signup-link" type="button" (click)="switchToSignInMode()">
+        Sign in
+      </button>
+    </p>
+  } @else {
+    <form class="auth__form" (submit)="$event.preventDefault()">
+      <!-- Email -->
+      <div class="auth__field">
+        <label class="auth__label" for="auth-email-forget-password">Email address</label>
+        <app-input
+          inputId="auth-email-forget-password"
+          type="email"
+          placeholder="joi@example.com"
+          autocomplete="email"
+        />
+      </div>
+
+      <!-- Submit -->
+      <app-ui-button [btnType]="buttonType" [variant]="buttonVariant" class="auth__submit-btn"
+        >Submit</app-ui-button
+      >
+    </form>
+
+    <!-- Footer -->
+    <p class="auth__signup-prompt">
+      Go back to &nbsp;<button class="auth__signup-link" type="button" (click)="switchToSignInMode()">Sign in</button>
+    </p>
+  }
+</div>

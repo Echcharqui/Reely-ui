@@ -1,9 +1,13 @@
 <div class="page-layout">
-  <app-header></app-header>
+  <app-header (profileClicked)="onProfileClicked()"></app-header>
 
   <main class="page-layout__main">
     <router-outlet></router-outlet>
   </main>
+
+  <app-modal [isOpen]="authModalOpen()" (closed)="onAuthModalClosed()">
+    <app-auth (closed)="onAuthModalClosed()" />
+  </app-modal>
 
   <app-footer></app-footer>
 </div>

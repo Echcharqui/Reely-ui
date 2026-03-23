@@ -18,8 +18,11 @@
   background-color: $color-surface;
   box-shadow: $movie-card-shadow;
   cursor: pointer;
-  transition: transform $transition-base, box-shadow $transition-base;
-
+  transition:
+    transform $transition-base,
+    box-shadow $transition-base;
+  transition-duration: 300ms;
+  
   &:hover {
     box-shadow: $shadow-lg;
   }

@@ -1,7 +1,8 @@
 import { Component, input } from '@angular/core';
 import { LucideAngularModule, LucideIconData } from 'lucide-angular';
 
-export type UiButtonVariant = 'primary' | 'ghost';
+import { ButtonsTypes } from '../../../types/enum/buttons.types';
+import { Variants } from '../../../types/enum/Variants.type';
 
 @Component({
   selector: 'app-ui-button',
@@ -11,7 +12,8 @@ export type UiButtonVariant = 'primary' | 'ghost';
   styleUrl: './ui-button.scss',
 })
 export class UiButtonComponent {
-  readonly variant = input<UiButtonVariant>('primary');
+  readonly variant = input<Variants>(Variants.PRIMARY);
   readonly icon = input<LucideIconData | undefined>(undefined);
   readonly iconSize = input<number>(18);
+  readonly btnType = input<ButtonsTypes>(ButtonsTypes.BUTTON);
 }

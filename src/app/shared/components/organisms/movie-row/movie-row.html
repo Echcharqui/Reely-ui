@@ -2,6 +2,10 @@
   <!-- Row header -->
   <div class="movie-row__header">
     <h2 class="movie-row__label">{{ rowLabel() }}</h2>
+    <button class="movie-row__see-more" (click)="seeMore()" aria-label="See more">
+      See more
+      <lucide-icon class="movie-row__see-more-icon" [img]="icons.ArrowRight" [size]="14" />
+    </button>
   </div>
 
   @if (movies().length > 0) {
